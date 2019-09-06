@@ -1,0 +1,125 @@
+/* ------ Global ------ */
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+html {
+    font-family: 'Open Sans', sans-serif;
+}
+body {
+    background-color: #28C9A7
+}
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.card {
+    width: 70%;
+    background-color: #fafafa;
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+.btn {
+    max-height: 50px;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background-image: linear-gradient(to right, #9FDB95 0%, #28C9A7 100%);
+    padding: 15px 40px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    border-radius: 100px;
+}
+
+.btn-grad:hover { background-position: right center; }
+
+/* ------ scores ------ */
+
+.scores {
+    display: flex;
+}
+
+.score {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+.score h1 {
+    font-weight: 600;
+    margin-bottom: 10px;;
+    font-size: 1.5rem;
+}
+
+.life-bar {
+    margin-bottom: 5px;
+    width: 80%;
+    height: 10px;
+    border: 1px solid #cfcfcf;
+    border-radius: 10px;
+}
+.life-bar .life {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    background-color: #6DF1B8;
+}
+
+.life-bar .life.bad {
+    background-color: #EFAF55;
+}
+
+.life-bar .life.critical{
+    background-color: #D95A56;
+}
+
+/* ------ result ------ */
+
+.result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btnwin {
+    margin-top: 10px;
+    background: #4CAF50;
+}
+.btnwin:hover, btnwin:active,btnwin :focus {
+    background: #43A047;
+}
+
+.btnlose {
+    margin-top: 10px;
+    background: #D95A56;
+}
+.btnlose:hover, btnlose:active, btnlose:focus {
+    background: #c73e39;
+}
+
+/* ------ controls ------ */
+
+.controls {
+    display: flex;
+    justify-content: center;
+}
+
+.controls .btn {
+    margin: 0 10px;
+}

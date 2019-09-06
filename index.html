@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&display=swap" rel="stylesheet">
+
+
+    <title>Battle App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="card scores" v-if="running">
+                <div class="score">
+                    <h1>{{ playerPokemon }}</h1>
+                    <div class="life-bar">
+                        <div class="life"
+                            :class="{critical: playerLife <= 20, bad: playerLife <= 50}"
+                            :style="{width: playerLife + '%'}"
+                        >
+                        </div>
+                    </div>
+                    <div>{{ playerLife }}%</div>
+                </div>
+                <div class="score">
+                    <h1>{{ opponentPokemon }}</h1>
+                    <div class="life-bar">
+                        <div class="life"
+                            :class="{critical: opponentLife < 20, bad: opponentLife <= 50}"
+                            :style="{width: opponentLife + '%'}"
+                        >
+                        </div>
+                    </div>
+                    <div>{{ opponentLife }}%</div>
+                </div>
+            </div>
+            <div v-if="hasResult" class="card result">
+                <div v-if="win">
+                    <h2>Opponent`s Pokemon fainted.</h2>
+                </div>
+                <div v-if="lose">
+                    <h2>Your Pokemon fainted. </h2>
+                </div>
+                <!-- <button class="btn" 
+                    :class="{btnwin: win, btnlose: lose}"
+                    type="button"
+                    @click="startBattle"
+                    >
+                    Play again!
+                </button> -->
+    
+            </div>
+            <div class="card controls">
+                <template v-if="running">
+                    <button class="btn atk1" @click="attack(false, false, playerPokemon, moves.moveOne)">{{ moves.moveOne }} NORMAL</button>
+                    <button class="btn atk2" @click="drainAndHurt(playerPokemon, moves.moveTwo)">{{ moves.moveTwo }} GRASS</button>
+                    <button class="btn atk3" @click="attack(true, false, playerPokemon, moves.moveThree)">{{ moves.moveThree }} GRASS</button>
+                    <button class="btn atk4" @click="attack(false, true, playerPokemon, moves.movefour)">{{ moves.moveFour }} GRASS</button>
+                    <button class="btn" @click="running = false">Run</button>
+                </template>
+                <template v-else>
+                    <button class="btn" @click="startBattle">wild 'pokemon' appeared</button>
+                </template>
+            </div>
+            <div class="card logs" v-if="logs">
+                {{ logs }}
+            </div>
+        </div>
+        <!-- <div class="quotes">
+            wild 'pokemon' appeared
+            go 'pokemon'
+            'someone' wants to battle
+            what will 'pokemon' do?
+            'pokemon' used 'skill'
+            'trainer' sent out 'pokemon'
+            'pokemon' fainted! Play again?
+            Can't escape.
+        </div> -->
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
