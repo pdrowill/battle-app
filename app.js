@@ -8,7 +8,7 @@ new Vue ({
             moveFour: 'Solar Beam'
         },
         playerPokemon: 'Bulbasaur',
-        opponentPokemon: 'Mew Two',
+        opponentPokemon: 'Pidgey',
         running: false,
         playerLife: 100,
         opponentLife: 100,
