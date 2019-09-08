@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
 
     <title>Battle App</title>
@@ -14,7 +14,10 @@
 <body>
     <div id="app">
         <div class="container">
-            <div class="card scores" v-if="running">
+            <div class="icon">
+                <img id="pokeball" src="images/pokeball.svg" alt="icon pokeball" >
+            </div>
+            <div class="card scores" v-if="running || logs.length > 0">
                 <div class="score">
                     <h1>{{ playerPokemon }}</h1>
                     <div class="life-bar">
@@ -38,36 +41,53 @@
                     <div>{{ opponentLife }}%</div>
                 </div>
             </div>
-            <div v-if="hasResult" class="card result">
-                <div v-if="win">
-                    <h2>Opponent`s Pokemon fainted.</h2>
-                </div>
-                <div v-if="lose">
-                    <h2>Your Pokemon fainted. </h2>
-                </div>
-                <!-- <button class="btn" 
-                    :class="{btnwin: win, btnlose: lose}"
-                    type="button"
-                    @click="startBattle"
-                    >
-                    Play again!
-                </button> -->
-    
-            </div>
             <div class="card controls">
                 <template v-if="running">
-                    <button class="btn atk1" @click="attack(false, false, playerPokemon, moves.moveOne)">{{ moves.moveOne }} NORMAL</button>
-                    <button class="btn atk2" @click="drainAndHurt(playerPokemon, moves.moveTwo)">{{ moves.moveTwo }} GRASS</button>
-                    <button class="btn atk3" @click="attack(true, false, playerPokemon, moves.moveThree)">{{ moves.moveThree }} GRASS</button>
-                    <button class="btn atk4" @click="attack(false, true, playerPokemon, moves.movefour)">{{ moves.moveFour }} GRASS</button>
-                    <button class="btn" @click="running = false">Run</button>
+                    <button class="btn atk1" @click="attack(false, false, playerPokemon, moves.moveOne)">{{ moves.moveOne }}</button>
+                    <button class="btn atk2" @click="drainAndHurt(playerPokemon, moves.moveTwo)">{{ moves.moveTwo }}</button>
+                    <button class="btn atk3" @click="attack(true, false, playerPokemon, moves.moveThree)">{{ moves.moveThree }}</button>
+                    <button class="btn atk4" @click="attack(false, true, playerPokemon, moves.moveFour)">{{ moves.moveFour }}</button>
+                    <button class="btn" @click="run">Run</button>
                 </template>
                 <template v-else>
                     <button class="btn" @click="startBattle">wild 'pokemon' appeared</button>
                 </template>
             </div>
-            <div class="card logs" v-if="logs">
-                {{ logs }}
+            <div v-if="hasResult" class="card result">
+                    <div v-if="win">
+                        <h2>Opponent`s Pokemon fainted.</h2>
+                    </div>
+                    <div v-if="lose">
+                        <h2>Your Pokemon fainted. </h2>
+                    </div>
+                    <!-- <button class="btn" 
+                        :class="{btnwin: win, btnlose: lose}"
+                        type="button"
+                        @click="startBattle"
+                        >
+                        Play again!
+                    </button> -->
+        
+                </div>
+            <div class="card logs move" v-if="running">
+                <p v-if="logs.length == 0 ">Go {{ playerPokemon }}</p>
+                <template v-if="logs.length > 0" >
+                    <ul style="list-style: none">
+                        <li>
+                            {{ logs[0] }}
+                        </li>
+                    </ul>
+                </template>
+            </div>
+            <div class="card logs damage" :class="{lastLog: running}" v-if="logs.length > 0 && running">
+                <h1>Battle Dialog</h1>
+                <ul style="list-style: none">
+                    <li :class="damage.cls" v-for="damage in damages">
+                        {{ damage.text }}
+                        <hr>
+                    </li>
+                    
+                </ul>
             </div>
         </div>
         <!-- <div class="quotes">
